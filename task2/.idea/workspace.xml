@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2b4bf17-dca0-4b32-85f4-e37c17cf3b5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/task1/task1$Point.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/task1/task1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task2/src/task2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task2/src/Task2.java" afterDir="false" />
+    <list default="true" id="c345c9d0-11cd-486d-9257-b3405673a6c1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../task1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../task1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task1/out/production/task1/task1$Point.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task1/out/production/task1/task1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task1/src/task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task1/src/Task1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +19,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2G7OzX4s2SDNDhKmjVcwEPNJdwd" />
+  <component name="ProjectId" id="2G7P8jVg6pl4jTOo4rhkO5wfjIm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,28 +28,19 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a2b4bf17-dca0-4b32-85f4-e37c17cf3b5c" name="Changes" comment="" />
-      <created>1665736419501</created>
+      <changelist id="c345c9d0-11cd-486d-9257-b3405673a6c1" name="Changes" comment="" />
+      <created>1665736493009</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1665736419501</updated>
+      <updated>1665736493009</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

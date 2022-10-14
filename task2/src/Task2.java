@@ -1,7 +1,12 @@
+/*Замечания ко второй задаче:
+1) Также имя класса.
+2) Смотри, решение мб и рабочее, но уезжающие вправо if`ы - обычно антипаттерн.
+    Подумай, есть идеи, как можно сделать не через if`ы?*/
+
 
 import java.math.BigDecimal;
 
-public class task2 {
+public class Task2 {
     public static void main(String[] args) {
         BigDecimal k1 = new BigDecimal("1024");
         String strBytes = args[0];
