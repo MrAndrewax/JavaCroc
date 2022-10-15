@@ -14,6 +14,9 @@
     соответственно мы не привязаны к количеству вершин (если не учитывать формулу герона)
 */
 
+
+package ru.croc.task1;
+
 import java.util.Scanner;
 
 public class Task1 {
