@@ -41,7 +41,7 @@ public class Task1 {
         for (int i = 0; i < pointsCount - 1; i++){
             for (int j = i + 1; j < pointsCount; j++){
                 if (points[i].x == points[j].x && points[i].y == points[j].y){
-                    System.out.print("Точки не удовлетворяют неравенству треугольника => они не образуют треугольник\n");
+                    System.out.print("Вы ввели одинаковые точки => треугольника не существует\n");
                     System.exit(2);
                 }
             }
