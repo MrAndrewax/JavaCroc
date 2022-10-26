@@ -1,58 +1,67 @@
-/* Условие:
-    В текстах программ на Java могут использоваться многострочные и однострочные (// ...) комментарии.
-    Реализовать метод, принимающий на вход строковую переменную - исходный текст программы на Java,
-    вырезающий из этой строки все комментарии и возвращающий результат в виде строки.
- */
-
-/*В качестве исходного текста для задачи я взял этот код*/
-
-public class Main{
+public class Task4{
     public static void main(String[] args) {
         //String sourceText = "hard code\n//small comment \n very very hard code \n /*bigger \n comment \n */ \n lol";
         String sourceText = """
-                /* Условие:
-                    В текстах программ на Java могут использоваться многострочные и однострочные (// ...) комментарии.
-                    Реализовать метод, принимающий на вход строковую переменную - исходный текст программы на Java,
-                    вырезающий из этой строки все комментарии и возвращающий результат в виде строки.
-                 */
-                                
-                /*В качестве исходного текста для задачи я взял этот код*/
-                                
-                //comment
-                
-                /*Big comment*///small comment
-                
+                           
                 <code>
-                
-                // strange comment /* nice
-                                        comment
-                                                !*///small comment
-                
+                //single line comment
+                /*multi line comment*/
                 <hard code>
-                
-                /*sad,jshd skjdh*/
+                /*another
+                    multi
+                        line
+                            comment*/         
+                <very hard code>
+                                
+                /*multi line 
+                comment*///single comment after multi line comment//another single line comment
+                <very very hard code>
+                                
+                /*
+                 * My first ever program in Java!
+                 */
+                class Hello { // class body starts here\s
+                 \s
+                  /* main method */
+                  public static void main(String[] args/* we put command line arguments here*/) {
+                    // this line prints my first greeting to the screen
+                    System.out.println("Hi!"); // :)
+                  }
+                } // the end
+                // to be continued...
+                                
                 """;
 
 
         int start = -1;
         int end = -1;
         String tempStr;
-
-        /*сначала удаляем многострочные комментарии*/
+        //System.out.println(sourceText);
+        /*Проводим аналогичную операцию
+            с многострочными комментариями */
         while (true){
             start = sourceText.indexOf("/*");
             if (start == -1){
                 break;
             }
             tempStr = sourceText.substring(start);
-            end = tempStr.indexOf("*/");
-            tempStr = sourceText.substring(start, end + start + 2);//Сейчас tempStr ссылается на многострочный комментарий. Добавляем к концу строку 2, чтобы захватить */
+
+
+            int end1 = tempStr.substring(2).indexOf("/*");
+            int end2 = tempStr.indexOf("*/");
+
+            if (end1 != -1 && end1 < end2){
+                tempStr = sourceText.substring(start, start + end1 + 2);
+                System.out.println("temp_str = " + tempStr);
+            }
+            else{
+                tempStr = sourceText.substring(start, end2 + start + 2);//Сейчас tempStr ссылается на многострочный комментарий. Добавляем к концу строку 2, чтобы захватить */
+            }
+
             sourceText = sourceText.replace(tempStr, "");
         }
+        //System.out.println(sourceText);
 
-
-        /*После того как все многострочные комментарии удалены, удаяем однострочные*/
-        
         while (true){
             start = sourceText.indexOf("//");//находим начало комментария.
             if (start == -1){
@@ -69,8 +78,6 @@ public class Main{
 
             sourceText = sourceText.replace(tempStr, "");//удаляем найденный комментарий.
         }
-
-
 
         System.out.println(sourceText);
     }
