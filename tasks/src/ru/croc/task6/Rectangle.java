@@ -37,4 +37,10 @@ public class Rectangle extends Figure{
     public String toString(){
         return "Rectangle " + point1.toString() + ", "+ point2.toString();
     }
+
+    @Override
+    public boolean isPointInFigure(int x, int y){
+        return x >= point1.getX() && x <= point2.getX()
+                && y >= point1.getY() && y <= point2.getY();
+    }
 }

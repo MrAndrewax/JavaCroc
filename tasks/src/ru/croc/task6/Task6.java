@@ -1,15 +1,8 @@
 package ru.croc.task6;
 
-interface Movable{
-    public void move(int dx, int dy);
-}
 
-abstract class Figure implements Movable {
-    @Override
-    public String toString(){
-        return "Figure";
-    }
-}
+
+
 
 public class Task6{
     public static void main(String[] args) {
@@ -21,13 +14,21 @@ public class Task6{
         Annotation a6 = new Annotation(new Rectangle (1000, 1000, 2000, 2000),"large house");
         Annotation a7 = new Annotation(new Rectangle (10, 10, 20, 20),"child");
         Annotation a8 = new Annotation(new Rectangle (25, 25, 30, 30),"cat");
-
         Annotation[] annotations = {a1, a2, a3, a4, a5, a6, a7, a8};
-
         AnnotatedImage annotatedImage = new AnnotatedImage("image/path", annotations);
-        for (Annotation annotation : annotatedImage.getAnnotations()){
-            System.out.println(annotation.toString());
-        }
+
+
+        Annotation b1 = annotatedImage.findByLabel("house");
+        System.out.println(b1);
+        Annotation b2 = annotatedImage.findByPoint2(215, 215);
+        System.out.println(b2);
+
+        Annotation b3 = annotatedImage.findByPoint2(26, 27);
+        System.out.println(b3);
+
+        Annotation b4 = annotatedImage.findByPoint2(1500, 1500);
+        System.out.println(b4);
+
     }
 }
 

@@ -39,4 +39,12 @@ public class Circle extends Figure{
     public String toString(){
         return "Circle" + point.toString() +  ", " + r;
     }
+
+
+    @Override
+    public boolean isPointInFigure(int x, int y){
+        return Math.pow((x - point.getX()), 2)
+                + Math.pow((y - point.getY()), 2)
+                <= Math.pow(r, 2);
+    }
 }

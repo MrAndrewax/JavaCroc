@@ -41,16 +41,9 @@ public class ChessPosition{
     @Override
     public String toString(){
         String result = "";
-        switch (x) {
-            case (1) -> result += "a";
-            case (2) -> result += "b";
-            case (3) -> result += "c";
-            case (4) -> result += "d";
-            case (5) -> result += "e";
-            case (6) -> result += "f";
-            case (7) -> result += "g";
-            case (8) -> result += "h";
-        }
+
+        char c = (char) (x + (int) 'a');
+        result += c;
         result += (y + 1);
         return result;
     }
@@ -60,25 +53,14 @@ public class ChessPosition{
         String s2 = position.substring(1);
         char c = s1.charAt(0);
 
-        int x = switch (c) {
-            case ('a') -> 0;
-            case ('b') -> 1;
-            case ('c') -> 2;
-            case ('d') -> 3;
-            case ('e') -> 4;
-            case ('f') -> 5;
-            case ('g') -> 6;
-            case ('h') -> 7;
-            default -> -1;
-        };
-
+        int x = (int) c - 'a';
         int y = Integer.parseInt(s2);
 
-        if (x == -1 || y < 0 || y > 9){
+        if (x < 0 || x > 8 || y < 1 || y > 9){
             throw new IllegalPositionException();
         }
         else{
-            return new ChessPosition(x, y);
+            return new ChessPosition(x, y - 1);
         }
     }
 
