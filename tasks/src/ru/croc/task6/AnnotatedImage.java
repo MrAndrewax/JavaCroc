@@ -10,7 +10,7 @@ public class AnnotatedImage {
         this.imagePath = imagePath;
         this.annotations = annotations;
     }
-    
+
     Annotation findByPoint(int x, int y){
         for (Annotation annotation: annotations){
             if (annotation.figure.isPointInFigure(x, y)){

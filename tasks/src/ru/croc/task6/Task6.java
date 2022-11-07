@@ -20,13 +20,13 @@ public class Task6{
 
         Annotation b1 = annotatedImage.findByLabel("house");
         System.out.println(b1);
-        Annotation b2 = annotatedImage.findByPoint2(215, 215);
+        Annotation b2 = annotatedImage.findByPoint(215, 215);
         System.out.println(b2);
 
-        Annotation b3 = annotatedImage.findByPoint2(26, 27);
+        Annotation b3 = annotatedImage.findByPoint(26, 27);
         System.out.println(b3);
 
-        Annotation b4 = annotatedImage.findByPoint2(1500, 1500);
+        Annotation b4 = annotatedImage.findByPoint(1500, 1500);
         System.out.println(b4);
 
     }
