@@ -16,20 +16,14 @@ public class Task9{
     }
     public static void main(String[] args){
         String path = args[0];//"КРОК/работа/src/./../../универ/../../../мемы/котики/";
-
-
         String[] files = path.split("/");
-
-
-        int j = 0;
+        int j = 0;//счетчик "."
         for (String file: files){
             if (Objects.equals(file, ".")){
                 j++;
             }
         }
-
         String[] commonFiles = new String [files.length - j];
-
         int k = 0;
         for (String file: files){
             if (!Objects.equals(file, ".")){
@@ -37,7 +31,6 @@ public class Task9{
                 k++;
             }
         }
-
         int l = 0;
         while (l < commonFiles.length){
             if (l != 0 && Objects.equals(commonFiles[l], "..") && !Objects.equals(commonFiles[l-1], "..")){
@@ -49,7 +42,6 @@ public class Task9{
                 l++;
             }
         }
-
         StringBuilder resultSB = new StringBuilder(commonFiles[0]);
         for (int y = 1; y < commonFiles.length; y++){
             resultSB.append("/").append(commonFiles[y]);
