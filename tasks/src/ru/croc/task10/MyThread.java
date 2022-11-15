@@ -25,9 +25,7 @@ public class MyThread implements Runnable{
                     active = false;
                 }
             }
-
         }
-
     }
 
     @Override

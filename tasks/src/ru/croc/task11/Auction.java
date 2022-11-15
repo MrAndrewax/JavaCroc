@@ -13,9 +13,13 @@ public class Auction {
                 this.currentValue = value;
             }
         }
-
     }
-    public String getWinnerName(){
-        synchronized(lock){return userName;}
+    public String getWinnerName(long currentTime){
+        synchronized(lock){
+            if (currentTime > endTime){
+                return userName;
+            }
+            return null;
+        }
     }
 }
