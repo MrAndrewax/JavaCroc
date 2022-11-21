@@ -16,12 +16,8 @@ public class Task10{
 
     public static void main(String[] args) throws Exception {
 
-        int threadsNumber = 9;//Integer.parseInt(args[0]);//количество потоков
-
-        String someStrForTest = "smsmbls";
-        String someStringHash = Solution.hashPassword(someStrForTest);
-
-        String hash = "40682260CC011947FC2D0B1A927138C5";//args[1];//Хэш пароля, который надо найти
+        int threadsNumber = Integer.parseInt(args[0]);//количество потоков
+        String hash = args[1];//Хэш пароля, который надо найти
         String password = Solution.calculatePassword(threadsNumber, hash);
         if (password.equals("")){
             System.out.println("Нет пароля с таким хэшем: " + hash);
