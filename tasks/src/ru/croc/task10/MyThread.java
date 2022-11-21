@@ -20,9 +20,9 @@ public class MyThread implements Callable<String>{
 
     public String bruteForce(String hash, int threadIndex, int threadsNumber){//7 циклов в тупую.
         for (long i = threadIndex; (i < 8_031_810_176L) && active; i += threadsNumber){
+            System.out.println(i);
             String password = Solution.convert(i);
             //System.out.println(i + " password: " + password + "\nhash: " + Solution.hashPassword(password));
-
             if (Solution.hashPassword(password).equals(hash)){
                 //System.out.println(i + "password: " + password + "\nhash: " + Solution.hashPassword(password));
                 active = false;

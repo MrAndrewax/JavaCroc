@@ -27,7 +27,6 @@ public class Solution {
         //executorService.awaitTermination(1, TimeUnit.DAYS);
 
         for (Future<String> future:futures){
-
             String password = null;
             try {
                 password = future.get();

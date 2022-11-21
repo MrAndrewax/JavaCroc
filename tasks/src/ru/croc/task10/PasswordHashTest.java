@@ -15,6 +15,19 @@ public class PasswordHashTest {
     private static final String INITIAL_HASH = "40682260CC011947FC2D0B1A927138C5";
 
 
+    //@Test
+    public void myTest() {
+        int threadsNumber = 8;
+
+        String someStrForTest = "croctop";
+        String someStringHash = hashPassword(someStrForTest);
+        String password = Solution.calculatePassword(threadsNumber, someStringHash);
+        String recalculatedHash = hashPassword(password);
+
+        assertNotSame(recalculatedHash, INITIAL_HASH);
+    }
+
+
     @Test
     public void positiveMainCaseTest() {
         int threadsNumber = 8;
