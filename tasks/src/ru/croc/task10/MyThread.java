@@ -1,35 +1,42 @@
 package ru.croc.task10;
 
-public class MyThread implements Runnable{
+import java.util.concurrent.Callable;
+
+public class MyThread implements Callable<String>{
 
     private static final Object lock = new Object();
-    private final int threadNum;
-    private final int threadsCount;
+    private final int threadIndex;
+    private final int threadsNumber;
     private final String hash;
-    private static boolean active;
+    private static volatile boolean active;
 
-
-    MyThread(int threadNum, int threadsCount, String hash){
-        this.threadNum = threadNum;
-        this.threadsCount = threadsCount;
+    MyThread(int threadIndex, int threadsNumber, String hash) {
+        //System.out.println("Thread " + threadIndex + " " + threadsNumber);
+        this.threadIndex = threadIndex;
+        this.threadsNumber = threadsNumber;
         this.hash = hash;
         active = true;
     }
 
-    public static void bruteForce(String hash, int threadNum, int threadsCount){//7 циклов в тупую.
-        for (long i = threadNum; i < 8_031_810_176L && active; i += threadsCount){
-            synchronized (lock){
-                String password = Task10.convert(i);
-                if (Task10.hashPassword(password).equals(hash)){
-                    System.out.println("password: " + password + "\nhash: " + Task10.hashPassword(password));
-                    active = false;
-                }
+    public String bruteForce(String hash, int threadIndex, int threadsNumber){//7 циклов в тупую.
+        for (long i = threadIndex; (i < 8_031_810_176L) && active; i += threadsNumber){
+            String password = Solution.convert(i);
+            //System.out.println(i + " password: " + password + "\nhash: " + Solution.hashPassword(password));
+
+            if (Solution.hashPassword(password).equals(hash)){
+                //System.out.println(i + "password: " + password + "\nhash: " + Solution.hashPassword(password));
+                active = false;
+                return password;
             }
         }
+        return "";
     }
 
+
     @Override
-    public synchronized void run() {
-        bruteForce(hash, threadNum, threadsCount);
+    public String call(){
+        return bruteForce(hash, threadIndex, threadsNumber);
     }
 }
+
+
