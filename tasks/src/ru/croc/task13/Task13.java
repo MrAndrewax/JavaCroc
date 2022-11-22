@@ -1,11 +1,7 @@
 package ru.croc.task13;
 
 import java.io.*;
-import java.net.Inet4Address;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 class User{
     private List<Integer> history;
@@ -15,6 +11,7 @@ class User{
             history.add(film);
         }
     }
+
 
     public List<Integer> getHistory(){
         return history;
@@ -51,10 +48,7 @@ class Film{
         return "("+ id +", " + filmName + ")";
     }
 }
-
-class Films{}//это будет хэш таблица. фильмы точно надо хранить как хэш таблицу
-
-class Rec{
+class RecommenderSystem {
 
     public static User stringToUser(String string){
         String[] strFilms = string.split(",");
@@ -70,27 +64,8 @@ class Rec{
         String filmName = strIdAndFilm[1];
         return new Film(id, filmName);
     }
-    public static List<Film> parseFileWithFilms(){
-        try {
-            File file = new File("/home/andrew/learning/java_croc/tasks/src/ru/croc/task13/1.txt");
-            //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(fr);
-            // считаем сначала первую строку
-            List<Film> films = new ArrayList<>();
-            String line = reader.readLine();
-            while (line != null) {
-                films.add(stringToFilm(line));
-                // считываем остальные строки в цикле
-                line = reader.readLine();
-            }
-            return films;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
+
     public static List<User> parseFileWithUsers(){
         try {
             File file = new File("/home/andrew/learning/java_croc/tasks/src/ru/croc/task13/2.txt");
@@ -113,6 +88,30 @@ class Rec{
         }
         return null;
     }
+    public static Map<Integer, String> parseFileWithFilms(){
+        try {
+            File file = new File("/home/andrew/learning/java_croc/tasks/src/ru/croc/task13/1.txt");
+            //создаем объект FileReader для объекта File
+            FileReader fr = new FileReader(file);
+            //создаем BufferedReader с существующего FileReader для построчного считывания
+            BufferedReader reader = new BufferedReader(fr);
+            // считаем сначала первую строку
+
+            Map<Integer, String> films = new HashMap<>();
+            String line = reader.readLine();
+            while (line != null) {
+                Film film = stringToFilm(line);
+                films.put(film.getId(), film.getFilmName());
+                // считываем остальные строки в цикле
+                line = reader.readLine();
+            }
+            return films;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public static boolean isSimilarTaste(User user1, User user2){
         List<Integer> history1 = user1.getHistory();
@@ -132,6 +131,7 @@ class Rec{
                 usersWithSimilarTaste.add(user2);
             }
         }
+        usersWithSimilarTaste.remove(user);
         return usersWithSimilarTaste;
     }
     public static void removeViewedFilms(User user, List<User> usersWithSimilarTaste){
@@ -140,8 +140,17 @@ class Rec{
             history.removeIf(user.getHistory()::contains);
             user2.setHistory(history);
         }
+        Iterator<User> iterator = usersWithSimilarTaste.iterator();//создаем итератор
+        while(iterator.hasNext()) {//до тех пор, пока в списке есть элементы
+
+            User nextUser = iterator.next();//получаем следующий элемент
+            if ( nextUser.getHistory().isEmpty() ){
+                iterator.remove();//удаляем кота с нужным именем
+            }
+        }
+
     }
-    public static Film getTheMostViewedFilm(List<User> usersWithSimilarTaste, List<Film> films){
+    public static String getTheMostViewedFilm(List<User> usersWithSimilarTaste, Map<Integer, String> films){
         HashMap<Integer, Integer> tableWithViews = new HashMap<>();
         for (User userWithSimilarTaste : usersWithSimilarTaste){
             List<Integer> history = userWithSimilarTaste.getHistory();
@@ -165,13 +174,14 @@ class Rec{
         }
         assert maxEntry != null;
         int filmId = maxEntry.getKey();
+
         //у нас есть id фильма. Мы хотим найти его название
-        for (Film film : films){
-            if (film.getId() == filmId){
-                return film;
-            }
+
+        if(films.containsKey(filmId)){
+            return films.get(filmId);
+        } else{
+            return null;
         }
-        return null;
     }
 
 
@@ -180,17 +190,16 @@ class Rec{
 public class Task13 {
     public static void main(String[] args){
         List <User> users;
-        List <Film> films;
-        users = Rec.parseFileWithUsers();
-        films = Rec.parseFileWithFilms();
-        System.out.println(users);
-        //System.out.println(films);
+        Map<Integer, String> films;
+        users = RecommenderSystem.parseFileWithUsers();
+        films = RecommenderSystem.parseFileWithFilms();
+        System.out.println("Истории просмотров всех пользователей: " + users);
+        System.out.println("Все фильмы: " + films);
         assert users != null;
-        List<User> usersWithSimilarTaste = Rec.getUsersWithSimilarTaste(users.get(0), users);
-        System.out.println(usersWithSimilarTaste);
-        Rec.removeViewedFilms(users.get(0), usersWithSimilarTaste);
-        Film film = Rec.getTheMostViewedFilm(usersWithSimilarTaste, films);
-        assert film != null;
-        System.out.println(film.getFilmName());
+        List<User> usersWithSimilarTaste = RecommenderSystem.getUsersWithSimilarTaste(users.get(0), users);
+        RecommenderSystem.removeViewedFilms(users.get(0), usersWithSimilarTaste);
+        System.out.println("Отобранные списки без фильмов, которые пользователь уже смотрел: " + usersWithSimilarTaste);
+        String filmName = RecommenderSystem.getTheMostViewedFilm(usersWithSimilarTaste, films);
+        System.out.println(filmName);
     }
 }
