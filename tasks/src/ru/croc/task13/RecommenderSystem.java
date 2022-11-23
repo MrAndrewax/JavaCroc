@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RecommenderSystem {
 
@@ -87,9 +84,13 @@ public class RecommenderSystem {
     public static boolean isSimilarTaste(User user1, User user2){
         List<Integer> history1 = user1.getHistory();
         List<Integer> history2 = user2.getHistory();
+
+        Set<Integer> historySet1 = new HashSet<>(history1);
+        Set<Integer> historySet2 = new HashSet<>(history2);
+
         int counter = 0;
-        for (int film : history1){
-            if (history2.contains(film)){
+        for (int film : historySet1){
+            if (historySet2.contains(film)){
                 counter++;
             }
         }
