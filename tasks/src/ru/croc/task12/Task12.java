@@ -10,7 +10,8 @@ public class Task12{
         List<String> comments = new ArrayList<>();
         for (int i =0; i < 9; i++){
             comments.add("badWord" + (i+1));
-            comments.add("goodWord" + (i+1));
+            //comments.add("goodWord" + (i+1));
+            comments.add("goodWord" + (i+1) + " " + "badWord" + (i+1) + " goodWord" + (i+1));
         }
 
 

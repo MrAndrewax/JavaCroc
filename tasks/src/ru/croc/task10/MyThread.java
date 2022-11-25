@@ -4,7 +4,6 @@ import java.util.concurrent.Callable;
 
 public class MyThread implements Callable<String>{
 
-    private static final Object lock = new Object();
     private final int threadIndex;
     private final int threadsNumber;
     private final String hash;

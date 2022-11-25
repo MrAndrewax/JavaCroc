@@ -1,14 +1,5 @@
 package ru.croc.task10;
 
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.*;
-
-
-
-
-
 public class Task10{
     public static void main(String[] args) throws Exception {
         int threadsNumber = Integer.parseInt(args[0]);//количество потоков

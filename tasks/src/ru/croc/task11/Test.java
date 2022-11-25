@@ -25,15 +25,6 @@ public class Test {
         thread3.join();
         thread4.join();
 
-        /*
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-        executorService.submit(user1);
-        executorService.submit(user2);
-        executorService.submit(user3);
-        executorService.submit(user4);
-        executorService.shutdown();
-        executorService.awaitTermination(1, TimeUnit.DAYS);
-         */
         System.out.println("ПОБЕДИТЕЛЬ " + lot.getWinnerName());
     }
 }
