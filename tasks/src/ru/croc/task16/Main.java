@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-/*Нельзя сохранять логи в память. Надо их сразу обрабатывать и выводить в output*/
 
 public class Main {
 

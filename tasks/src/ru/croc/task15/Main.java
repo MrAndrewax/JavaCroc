@@ -40,62 +40,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-class Department{
-    private final String name;
-    private final String parent;
-    private final int hours;
-    private List<Department> children;
 
-    Department(String name, String parent, int hours){
-        this.name = name;
-        this.parent = parent;
-        this.hours = hours;
-        children = new ArrayList<>();
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getParent(){
-        return parent;
-    }
-
-    public int getHours(){
-        return hours;
-    }
-
-    public List<Department> getChildren(){
-        return children;
-    }
-
-    public void addChildren(Department child){
-        children.add(child);
-    }
-
-    public boolean isRoot(){
-        return parent.equals("-");
-    }
-
-    public String childrenToString(){
-        StringBuilder result = new StringBuilder();
-        for (Department dep : children){
-            result.append(dep.getName()).append(" ");
-        }
-        return result.toString();
-    }
-
-    @Override
-    public String toString() {
-        return (
-                "name: " + name + " parentName: " + parent
-                        + " hours: " + hours + "\n" + childrenToString() + "\n"
-        );
-    }
-}
 
 public class Main {
 
+    /*Этот метод принимает на вход строку типа "departmentName,parentName,numberOfHours"
+        и возвращает экземпляр класса Department*/
     public static Department stringToDepartment(String line){
         String[] departmentComponents = line.split(",");
         return new Department(
@@ -105,6 +55,9 @@ public class Main {
         );
     }
 
+    /*Этот метод читает из файла строки определнного типа,
+    создаёт соответствующие им экзмепляры класса Department
+    и добавляет их в Map*/
     public static Map<String, Department> getDepartmentsFromFile(String path){//"/home/andrew/learning/java_croc/tasks/src/ru/croc/task13/1.txt"
         try {
             File file = new File(path);
@@ -136,6 +89,7 @@ public class Main {
         return null;
     }
 
+    /*Возвраащает корневой элемент иерархии отделов*/
     public static Department getRoot(Map<String, Department> departments ){
         for (Map.Entry<String, Department> pair : departments.entrySet()) {
             if (pair.getValue().isRoot()) {
@@ -145,6 +99,7 @@ public class Main {
         return null;
     }
 
+    /*Рекурсивная функция, которая обходит хэш таблицу и тем самым считает количество часов*/
     public static int rec(Map<String, Department> departments, Department department, int counter){
         List<Department> children = department.getChildren();
 
@@ -165,26 +120,10 @@ public class Main {
         return counter + childrenMaxHours;
     }
 
-
-    /* int sumHours(Department dep)
-     * counter = start;
-     * childrenList;
-     * int max = 0;
-     * foreach(child: childrenList){
-     *   int childHours = sumHours(child)
-     *   if (childHours > max) max = childHours;
-     * }
-     * return counter + childHours;
-     * */
-
     public static void main(String[] args){
-        String path = "/home/andrew/learning/java_croc/tasks/src/ru/croc/task15/departments.txt";
+        String path = "/home/andrew/learning/java_croc/tasks/src/ru/croc/task15/departments.txt";//args[0];
         Map<String, Department> departments = getDepartmentsFromFile(path);
-        //System.out.println(departments);
         Department root = getRoot(departments);
-        //System.out.println(root);
-        int result = rec(departments, root, 0);
-        System.out.println(result);
+        System.out.println(rec(departments, root, 0));
     }
-
 }
