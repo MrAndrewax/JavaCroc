@@ -9,10 +9,10 @@ public class Filter implements BlackListFilter{
 
         for (int i = 0; i < comments.size(); i++){
             List<String> wordsInComment = new ArrayList<>(List.of(comments.get(i).split(" ")));
+
             for (String word : wordsInComment){
                 if (blackList.contains(word)){
-                    String clearComment = comments.get(i).replace(word, "");
-                    comments.set(i, clearComment);
+                    comments.set(i, "");
                 }
             }
         }
