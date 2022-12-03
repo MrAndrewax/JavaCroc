@@ -34,10 +34,7 @@ D311,C31,1
 //обязательно ли родителя определяют перед ребёнком?
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 
@@ -59,15 +56,10 @@ public class Main {
     создаёт соответствующие им экзмепляры класса Department
     и добавляет их в Map*/
     public static Map<String, Department> getDepartmentsFromFile(String path){//"/home/andrew/learning/java_croc/tasks/src/ru/croc/task13/1.txt"
-        try {
-            File file = new File(path);
-            FileReader fr = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fr);
+        try ( FileReader fr = new FileReader(path);
+             BufferedReader reader = new BufferedReader(fr)){
 
             Map<String, Department> departments = new HashMap<>();
-
-
-
             String line = reader.readLine();
             while (line != null) {
                 Department department = stringToDepartment(line);
@@ -84,9 +76,8 @@ public class Main {
             }
             return departments;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /*Возвраащает корневой элемент иерархии отделов*/
