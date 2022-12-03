@@ -13,22 +13,36 @@ public class Task13 {
     public static void main(String[] args){
 
         RecommenderSystem recommenderSystem = new RecommenderSystem();
-        GetterFromFile getterFromFile = new GetterFromFile();
+        dataGetterFromFile dataGetterFromFile = new dataGetterFromFile();
 
         List <User> users;
         Map<Integer, String> films;
-        users = getterFromFile.parseFileWithUsers();
-        films = getterFromFile.parseFileWithFilms();
+        users = dataGetterFromFile.parseFileWithUsers(args[0]);
+        films = dataGetterFromFile.parseFileWithFilms(args[1]);
+
+        System.out.println(users);
+
         assert users != null;
+        assert films != null;
 
         Scanner in = new Scanner(System.in);
-        System.out.print("Введите номер пользователя (от 0 до " + users.size() + ", для которого ищете рекомендацию: ");
-        int userNumber = in.nextInt();
+        System.out.print("Введите список просмотров текущего пользователя: ");
+        String currentUserStr = in.nextLine();
+        User currentUser = dataGetterFromFile.stringToUser(currentUserStr);
 
-        List<User> usersWithSimilarTaste = recommenderSystem.getUsersWithSimilarTaste(users.get(userNumber), users);
-        recommenderSystem.removeViewedFilms(users.get(userNumber), usersWithSimilarTaste);
-        System.out.println("Отобранные списки без фильмов, которые пользователь уже смотрел: " + usersWithSimilarTaste);
-        String filmName = recommenderSystem.getTheMostViewedFilm(usersWithSimilarTaste, films);
-        System.out.println("Рекомендованный фильм: " + filmName);
+        try {
+            List<User> usersWithSimilarTaste = recommenderSystem.getUsersWithSimilarTaste(currentUser, users);
+            System.out.println(usersWithSimilarTaste);
+            recommenderSystem.removeViewedFilms(currentUser, usersWithSimilarTaste);
+            System.out.println("Отобранные списки без фильмов, которые пользователь уже смотрел: " + usersWithSimilarTaste + "\n");
+            Map<Integer, Integer> tableWithViews = recommenderSystem.getTableWithViews(usersWithSimilarTaste, films);
+            int filmId = recommenderSystem.getTheMostViewedFilm(tableWithViews);
+            System.out.println(filmId);
+            System.out.println("Рекомендованный фильм: " + films.get(filmId));
+        }
+        catch (NoUsersException exception){
+            System.out.println("Пользователей с похожим вкусом нет.\nСервис не может предложить рекомендацию.");
+        }
+
     }
 }
