@@ -11,17 +11,24 @@ record Film(int id, String filmName) {
 
 public class Task13 {
     public static void main(String[] args){
+
+        RecommenderSystem recommenderSystem = new RecommenderSystem();
+        GetterFromFile getterFromFile = new GetterFromFile();
+
         List <User> users;
         Map<Integer, String> films;
-        users = RecommenderSystem.parseFileWithUsers();
-        films = RecommenderSystem.parseFileWithFilms();
-        System.out.println("Истории просмотров всех пользователей: " + users);
-        System.out.println("Все фильмы: " + films);
+        users = getterFromFile.parseFileWithUsers();
+        films = getterFromFile.parseFileWithFilms();
         assert users != null;
-        List<User> usersWithSimilarTaste = RecommenderSystem.getUsersWithSimilarTaste(users.get(0), users);
-        RecommenderSystem.removeViewedFilms(users.get(0), usersWithSimilarTaste);
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите номер пользователя (от 0 до " + users.size() + ", для которого ищете рекомендацию: ");
+        int userNumber = in.nextInt();
+
+        List<User> usersWithSimilarTaste = recommenderSystem.getUsersWithSimilarTaste(users.get(userNumber), users);
+        recommenderSystem.removeViewedFilms(users.get(userNumber), usersWithSimilarTaste);
         System.out.println("Отобранные списки без фильмов, которые пользователь уже смотрел: " + usersWithSimilarTaste);
-        String filmName = RecommenderSystem.getTheMostViewedFilm(usersWithSimilarTaste, films);
+        String filmName = recommenderSystem.getTheMostViewedFilm(usersWithSimilarTaste, films);
         System.out.println("Рекомендованный фильм: " + filmName);
     }
 }
