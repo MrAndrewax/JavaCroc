@@ -31,10 +31,8 @@ public class dataGetterFromFile {
     /*Функция parseFileWithUsers парсит файл с историями просмотров
       и возвращает список экземпляров класса User*/
     public List<User> parseFileWithUsers(String path){
-        try {
-            File file = new File(path);
-            FileReader fr = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fr);
+        try (FileReader fr = new FileReader(path);
+             BufferedReader reader = new BufferedReader(fr)){
             List <User> users = new ArrayList<>();
             String line = reader.readLine();
             while (line != null) {
@@ -43,19 +41,16 @@ public class dataGetterFromFile {
             }
             return users;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
-        return null;
     }
 
     /*Функция parseFileWithFilms парсит файл с фильмами
       и возвращает хеш таблицу, где ключом является идентификатор фильма,
         а значением - название фильма*/
     public Map<Integer, String> parseFileWithFilms(String path){
-        try {
-            File file = new File(path);
-            FileReader fr = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fr);
+        try (FileReader fr = new FileReader(path);
+             BufferedReader reader = new BufferedReader(fr)){
             Map<Integer, String> films = new HashMap<>();
             String line = reader.readLine();
             while (line != null) {
@@ -65,8 +60,7 @@ public class dataGetterFromFile {
             }
             return films;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
-        return null;
     }
 }
