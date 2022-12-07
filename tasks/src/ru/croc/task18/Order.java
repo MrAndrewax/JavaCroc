@@ -1,6 +1,6 @@
-package ru.croc.task17;
+package ru.croc.task18;
 
-public class Order {
+public class Order{
     int userID;
     String productId;
 

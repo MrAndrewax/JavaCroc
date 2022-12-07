@@ -17,11 +17,9 @@ public class SetInfoInDB{
         this.USER = USER;
         this.PASSWORD = PASSWORD;
     }
-    public void setInformationInDB(){
-        String path = "/home/andrew/learning/java_croc/tasks/src/ru/croc/task17/table.CSV";//args[0]
-
+    public void setInformationInDB(String path){
         GetInfoFromFile getter = new GetInfoFromFile();
-        List<Line> lines = getter.parseFileWithUsers(path);
+        List<OrderInfo> orderInfos = getter.parseFileWithUsers(path);
 
         Connection connection;
         try {
@@ -31,47 +29,41 @@ public class SetInfoInDB{
 
             String createProductsTable  = "DROP TABLE IF EXISTS products; " +
                     "CREATE TABLE products " +
-                    "(id VARCHAR(255), " +
-                    "product_number VARCHAR(255)," +
+                    "(product_id VARCHAR(255)," +
                     " product_name VARCHAR(255), " +
                     " price int, " +
-                    " PRIMARY KEY ( id ));";
-            String createOrdersTable = "DROP TABLE IF EXISTS orders; " +
-                    "CREATE TABLE orders " +
-                    "(id int not NULL, " +
+                    " PRIMARY KEY (product_id));";
+            String createUsersTable = "DROP TABLE IF EXISTS users; " +
+                    "CREATE TABLE users " +
+                    "(user_id int not NULL, " +
                     " user_name VARCHAR(255)," +
-                    " PRIMARY KEY ( id ));";
-
-            String createOrderProductsTable = "DROP TABLE IF EXISTS orders_products; " +
-                    "CREATE TABLE orders_products " +
-                    "(order_id int," +
+                    " PRIMARY KEY (user_id));";
+            String createOrdersTable = "DROP TABLE IF EXISTS orders; " +
+                    "CREATE TABLE orders" +
+                    "(user_id int," +
                     " product_id VARCHAR(255));";
-
             stmt.executeUpdate(createProductsTable);
+            stmt.executeUpdate(createUsersTable);
             stmt.executeUpdate(createOrdersTable);
-            stmt.executeUpdate(createOrderProductsTable);
 
             ConvertCSVToCollections converter = new ConvertCSVToCollections();
 
-            Map<Integer, Order> orders = converter.getOrders(lines);
-            Map<String, Product> products = converter.getProducts(lines);
-            List<Pair> pairs = converter.getPairs(lines, orders, products);
+            Map<Integer, User> users = converter.getOrders(orderInfos);
+            Map<String, Product> products = converter.getProducts(orderInfos);
+            List<Order> orders = converter.getPairs(orderInfos, users, products);
 
-            for (Map.Entry<Integer, Order> orderEntry : orders.entrySet()) {
-                String sql = String.format("INSERT INTO orders VALUES ('%d', '%s')", orderEntry.getKey(), orderEntry.getValue().userLogin);
+            for (Map.Entry<Integer, User> orderEntry : users.entrySet()) {
+                String sql = String.format("INSERT INTO users VALUES ('%d', '%s')", orderEntry.getValue().userId, orderEntry.getValue().userName);
                 stmt.executeUpdate(sql);
             }
             for (Map.Entry<String, Product> productEntry : products.entrySet()) {
-                String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')", productEntry.getKey(), productEntry.getValue().productName, productEntry.getValue().price);
+                String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')", productEntry.getValue().productId, productEntry.getValue().productName, productEntry.getValue().price);
                 stmt.executeUpdate(sql);
             }
-            for (Pair pair : pairs){
-                String sql = String.format("INSERT INTO orders_products VALUES ('%d', '%s')", pair.orderId, pair.productId);
+            for (Order order : orders){
+                String sql = String.format("INSERT INTO orders VALUES ('%d', '%s')", order.userID, order.productId);
                 stmt.executeUpdate(sql);
             }
-
-
-
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();

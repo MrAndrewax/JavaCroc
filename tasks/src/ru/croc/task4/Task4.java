@@ -6,17 +6,17 @@ public class Task4{
         String sourceText = """
                            
                 <code>
-                //single line comment
-                /*multi line comment*/
+                //single orderInfo comment
+                /*multi orderInfo comment*/
                 <hard code>
                 /*another
                     multi
-                        line
+                        orderInfo
                             comment*/         
                 <very hard code>
                                 
-                /*multi line 
-                comment*///single comment after multi line comment//another single line comment
+                /*multi orderInfo 
+                comment*///single comment after multi orderInfo comment//another single orderInfo comment
                 <very very hard code>
                                 
                 /*
@@ -25,8 +25,8 @@ public class Task4{
                 class Hello { // class body starts here\s
                  \s
                   /* main method */
-                  public static void main(String[] args/* we put command line arguments here*/) {
-                    // this line prints my first greeting to the screen
+                  public static void main(String[] args/* we put command orderInfo arguments here*/) {
+                    // this orderInfo prints my first greeting to the screen
                     System.out.println("Hi!"); // :)
                   }
                 } // the end
