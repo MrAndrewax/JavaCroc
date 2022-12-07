@@ -34,12 +34,7 @@ public class ConvertCSVToCollections{
 
         for (Line line : lines){
             Order order = orders.get(line.orderNumber);
-            /*
-            String strProductIndex = line.productNumber.replaceAll("[^0-9]", ""); // удалится все кроме цифр
-            int productIndex = Integer.parseInt(strProductIndex);*/
-
             Product product = products.get(line.productNumber);
-
             Pair pair = new Pair(order.orderId, product.productId);
             pairs.add(pair);
         }

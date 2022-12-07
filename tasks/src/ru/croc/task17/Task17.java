@@ -1,10 +1,5 @@
 package ru.croc.task17;
 
-
-//отношение многие ко многим
-//надо поработать над названиями
-
-
 public class Task17 {
     public static void main(String[] args){
         final String DB_URL = "jdbc:postgresql://localhost/testDB";//args[0]
@@ -18,7 +13,6 @@ public class Task17 {
             e.printStackTrace();
             return;
         }
-
         SetInfoInDB setterInfoInDB = new SetInfoInDB(DB_URL, USER, PASSWORD);
         setterInfoInDB.setInformationInDB();
     }

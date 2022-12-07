@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.function.Predicate;
 
 interface BlackListFilter{
-    //Т - тип элементов коллекции.
     /**
      * From the given list of comments removes ones
      * that contain words from the black list.

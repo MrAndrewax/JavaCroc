@@ -14,5 +14,5 @@ public class Order{
     public String toString() {
         return orderId + " " + userLogin;
     }
-}//Map<Integer, String> orders;
+}
 
