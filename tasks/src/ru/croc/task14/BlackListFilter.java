@@ -2,8 +2,6 @@ package ru.croc.task14;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.function.Predicate;
 
 interface BlackListFilter{
