@@ -3,8 +3,6 @@ package ru.croc.task18;
 import java.sql.*;
 
 public class ProductDAO{
-
-
     Product findProduct(String productCode){
         Connection connection;
         try {

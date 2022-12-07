@@ -55,7 +55,7 @@ public class RecommenderSystem {
     }
 
     /*Возвращает имя наиболее просматриваемого фильма*/
-    public Map<Integer, Integer> getTableWithViews(List<User> usersWithSimilarTaste, Map<Integer, String> films){
+    public Map<Integer, Integer> getTableWithViews(List<User> usersWithSimilarTaste){
         HashMap<Integer, Integer> tableWithViews = new HashMap<>();//Хэш таблица, где ключ - индекс фильма, а значение - кол-во просмотрво
         for (User userWithSimilarTaste : usersWithSimilarTaste){//итерируемся по всем пользователям
             for (int film : userWithSimilarTaste.getHistory()){//итерируемся по всем фильмам каждого из пользоваталей

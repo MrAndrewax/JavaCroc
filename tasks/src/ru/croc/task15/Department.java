@@ -101,4 +101,20 @@ public class Department{
             throw new RuntimeException(e);
         }
     }
+
+    public int calculateTime(){
+        List<Department> children = this.getChildren();
+
+        int childrenMaxHours = 0;
+        if (children.isEmpty()){
+            return this.getHours();
+        }
+        for (Department child : children){
+            int childHours = child.calculateTime();
+            if (childHours > childrenMaxHours){
+                childrenMaxHours = childHours;
+            }
+        }
+        return this.getHours() + childrenMaxHours;
+    }
 }
