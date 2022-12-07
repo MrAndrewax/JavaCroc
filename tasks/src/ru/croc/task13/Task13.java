@@ -35,7 +35,7 @@ public class Task13 {
             System.out.println(usersWithSimilarTaste);
             recommenderSystem.removeViewedFilms(currentUser, usersWithSimilarTaste);
             System.out.println("Отобранные списки без фильмов, которые пользователь уже смотрел: " + usersWithSimilarTaste + "\n");
-            Map<Integer, Integer> tableWithViews = recommenderSystem.getTableWithViews(usersWithSimilarTaste, films);
+            Map<Integer, Integer> tableWithViews = recommenderSystem.getTableWithViews(usersWithSimilarTaste);
             int filmId = recommenderSystem.getTheMostViewedFilm(tableWithViews);
             System.out.println(filmId);
             System.out.println("Рекомендованный фильм: " + films.get(filmId));
