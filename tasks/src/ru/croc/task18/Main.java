@@ -1,24 +1,22 @@
 package ru.croc.task18;
 
-import java.sql.*;
-import java.util.List;
-
-
-/*Таблицы те же, что и в task17*/
-/*
- * 1) users - Два столбца: user_id (<номер_заказа:integer>), user_name(<логин_пользователя:string>)
- * 2) products - 3 столбца: product_id (<артикул_товара:string>), product_name (<название_товара:string>), price (<цена_в_рублях:integer>)
- * 3) orders - эта таблица отражает отношение многие ко многим. Каждому пользователю может соответствовать несколько заказов и наоборот,
- * Конкретному заказу может соотвествовать несколько пользователей.
- * 3 столбца: user_id, product_id*/
+import ru.croc.task17.SetInfoInDB;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws Exception {
+        Class.forName("org.postgresql.Driver");
+        SetInfoInDB setterInfoInDB = new SetInfoInDB(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+        setterInfoInDB.setInformationInDB("/home/andrew/learning/java_croc/tasks/src/ru/croc/task17/table.CSV");
+
+        Tester tester = new Tester();
+        tester.testFindProduct1();
+        tester.testFindProduct2();
+        tester.testCreateProduct1();
+        //tester.testCreateProduct2();
+        tester.testUpdateProduct1();
+        tester.testUpdateProduct2();
     }
 }
+
+
+

@@ -6,17 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ConvertCSVToCollections{
-    public Map<Integer, User> getOrders(List<OrderInfo> orderInfos){
-        Map<Integer, User> orders = new HashMap<>();
-        for (OrderInfo orderInfo : orderInfos){
-            if (!orders.containsKey(orderInfo.userId)){
-                User user = new User(orderInfo.userId, orderInfo.userName);
-                orders.put(orderInfo.userId, user);
-            }
-        }
-        System.out.println(orders);
-        return orders;
-    }
     public Map<String, Product> getProducts(List<OrderInfo> orderInfos){
         Map<String, Product> products = new HashMap<>();
         for (OrderInfo orderInfo : orderInfos){
@@ -25,20 +14,17 @@ public class ConvertCSVToCollections{
                 products.put(orderInfo.productId, order);
             }
         }
-        System.out.println(products);
         return products;
     }
-    public List<Order> getPairs(List<OrderInfo> orderInfos, Map<Integer, User> orders, Map<String, Product> products){
-
-        List<Order> pairs = new ArrayList<>();
+    public List<Order> getOrders(List<OrderInfo> orderInfos, Map<String, Product> products){
+        List<Order> orders = new ArrayList<>();
 
         for (OrderInfo orderInfo : orderInfos){
-            User user = orders.get(orderInfo.userId);
-            Product product = products.get(orderInfo.productId);
-            Order pair = new Order(user.userId, product.productId);
-            pairs.add(pair);
+            int orderID = orderInfo.orderID;
+            String userLogin = orderInfo.userLogin;
+            String productID = orderInfo.productId;
+            orders.add(new Order(orderID, userLogin, productID));
         }
-        return pairs;
+        return orders;
     }
-
 }

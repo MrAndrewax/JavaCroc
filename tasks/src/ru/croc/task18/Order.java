@@ -1,11 +1,22 @@
 package ru.croc.task18;
 
-public class Order{
-    int userID;
-    String productId;
+import java.util.List;
+import java.util.Set;
 
-    Order(int userID, String productId){
-        this.userID = userID;
-        this.productId = productId;
+public class Order{
+    int orderID;
+    String userLogin;
+    List<String> productsID;
+    Order(int orderID, String userLogin, List<String> productsID){
+        this.orderID = orderID;
+        this.userLogin = userLogin;
+        this.productsID = productsID;
+    }
+
+    @Override
+    public String toString() {
+        return "orderID = " + orderID +
+                ", userLogin = '" + userLogin + '\'' +
+                ", productsID = '" + productsID + '\'';
     }
 }

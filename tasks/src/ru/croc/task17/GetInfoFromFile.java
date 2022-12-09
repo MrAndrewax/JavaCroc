@@ -9,14 +9,12 @@ import java.util.List;
 public class GetInfoFromFile{
     public OrderInfo stringToLine(String line){
         String[] arr = line.split(",");
-
-        int userId = Integer.parseInt(arr[0].trim());
-        String userName = arr[1].trim();
+        int orderId = Integer.parseInt(arr[0].trim());
+        String userLogin = arr[1].trim();
         String productId = arr[2].trim();
         String productName = arr[3].trim();
         int price = Integer.parseInt(arr[4].trim());
-
-        return new OrderInfo(userId, userName, productId, productName, price);
+        return new OrderInfo(orderId, userLogin, productId, productName, price);
     }
     public List<OrderInfo> parseFileWithUsers(String path){
         try (FileReader fr = new FileReader(path);

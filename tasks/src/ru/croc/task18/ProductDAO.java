@@ -4,85 +4,91 @@ import java.sql.*;
 
 public class ProductDAO{
     Product findProduct(String productCode){
-        Connection connection;
-        try {
-            connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
             Statement stmt = connection.createStatement();
 
-            String sql  = "SELECT * FROM products WHERE product_id = " + productCode;
-
+            String sql = String.format("SELECT * FROM products WHERE product_id = '%s'", productCode);
             ResultSet resultSet = stmt.executeQuery(sql);
 
-            String productID = resultSet.getString("product_id");
-            String productName = resultSet.getString("product_name");
-            int price = resultSet.getInt("price");
-
-            connection.close();
-
-            return new Product(productID, productName, price);
-
+            if (resultSet.next()){
+                String productID = resultSet.getString("product_id");
+                String productName = resultSet.getString("product_name");
+                int price = resultSet.getInt("price");
+                return new Product(productID, productName, price);
+            }
+            else{
+                return null;
+            }
         } catch (SQLException e) {
-            System.out.println("Connection Failed");
             e.printStackTrace();
-            return null;
+            throw new RuntimeException();
         }
-
     }
-    //Поиск в базе данных товара с указанным артикулом. Если соответствующего товара в базе данных нет, метод возвращает null.
 
     Product createProduct(Product product){
-        Connection connection;
-        try {
-            connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
             Statement stmt = connection.createStatement();
 
             String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')",product.productId, product.productName, product.price);
             stmt.executeUpdate(sql);
-            connection.close();
 
-            return product;
+            sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.productId);
+            ResultSet resultSet = stmt.executeQuery(sql);
+            if (resultSet.next()){
+                String productID = resultSet.getString("product_id");
+                String productName = resultSet.getString("product_name");
+                int price = resultSet.getInt("price");
+                return new Product(productID, productName, price);
+            }
+            else {
+                return null;
+            }
         } catch (SQLException e) {
-            System.out.println("Connection Failed");
             e.printStackTrace();
-            return null;
+            throw new RuntimeException();
         }
     }
-    //Создание нового товара. Если в базе данных существует товар с переданным артикулом, метод выбрасывает исключение.
 
     Product updateProduct(Product product){
-        Connection connection;
-        try {
-            connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
             Statement stmt = connection.createStatement();
 
-            String sql = String.format("UPDATE products SET product_name = '%s', price = '%d' WHERE id = '%s'", product.productName, product.price, product.productId);
+            String sql = String.format("UPDATE products SET product_name = '%s', price = '%d' WHERE product_id = '%s'", product.productName, product.price, product.productId);
             stmt.executeUpdate(sql);
-            connection.close();
 
-            return product;
+            sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.productId);
+            ResultSet resultSet = stmt.executeQuery(sql);
+            if (resultSet.next()){
+                String productID = resultSet.getString("product_id");
+                String productName = resultSet.getString("product_name");
+                int price = resultSet.getInt("price");
+                return new Product(productID, productName, price);
+            }
+            else {
+                return null;
+            }
         } catch (SQLException e) {
-            System.out.println("Connection Failed");
             e.printStackTrace();
-            return null;
+            throw new RuntimeException();
         }
     }
-    //Изменение информации о товаре. Название и цена товара в базе данных заменяется на значения, указанные в полях параметра product. Артикул товара, данные которого должны быть изменены, также задается полем объекта product.
 
     void deleteProduct(String productCode){
-        Connection connection;
-        try {
-            connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
             Statement stmt = connection.createStatement();
+            String sql;
 
-            String sql = String.format("DELETE FROM products WHERE product_name = '%s'", productCode);
+            sql = String.format("DELETE FROM orders WHERE product_id = '%s'", productCode);
             stmt.executeUpdate(sql);
-            connection.close();
-        } catch (SQLException e) {
-            System.out.println("Connection Failed");
+
+            sql = String.format("DELETE FROM products WHERE product_name = '%s'", productCode);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e){
             e.printStackTrace();
+            throw new RuntimeException();
         }
     }
-    //Удаление товара и всех упоминаний о нем в заказах. Вас смущает необходимость изменения уже выданных заказов, но заказчик настаивает.
 }
 
 
