@@ -3,6 +3,8 @@ package ru.croc.task18.Tests;
 import ru.croc.task17.SetInfoInDB;
 import ru.croc.task18.Config.DataBaseInfo;
 
+/*Денис, я это для себя делал. Не ругай пожалуйста за неаккуратность)00)00)*/
+
 public class Main {
     public static void main(String[] args) throws Exception {
         Class.forName("org.postgresql.Driver");
@@ -16,6 +18,7 @@ public class Main {
         //tester.testUpdateProduct1();
         //tester.testUpdateProduct2();
         tester.testDeleteProduct1();
+        tester.testCreateOrder1();
     }
 }
 
