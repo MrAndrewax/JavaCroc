@@ -1,4 +1,8 @@
-package ru.croc.task18;
+package ru.croc.task18.DAO;
+
+import ru.croc.task18.Config.DataBaseInfo;
+import ru.croc.task18.Order;
+import ru.croc.task18.Product;
 
 import java.sql.*;
 import java.util.List;
@@ -13,17 +17,14 @@ public class OrderDAO{
 
             ResultSet resultSet = stmt.executeQuery(sql);
             resultSet.next();
-            int index = resultSet.getInt("max");
 
-
-            return index;
+            return resultSet.getInt("max");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-
-    Order createOrder(String userLogin, List<Product> products){
+    public Order createOrder(String userLogin, List<Product> products){
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
             String sql;

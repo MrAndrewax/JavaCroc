@@ -1,9 +1,12 @@
-package ru.croc.task18;
+package ru.croc.task18.DAO;
+
+import ru.croc.task18.Config.DataBaseInfo;
+import ru.croc.task18.Product;
 
 import java.sql.*;
 
 public class ProductDAO{
-    Product findProduct(String productCode){
+    public Product findProduct(String productCode){
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
 
@@ -24,7 +27,7 @@ public class ProductDAO{
         }
     }
 
-    Product createProduct(Product product){
+    public Product createProduct(Product product){
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
 
@@ -48,7 +51,7 @@ public class ProductDAO{
         }
     }
 
-    Product updateProduct(Product product){
+    public Product updateProduct(Product product){
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
 
@@ -72,7 +75,7 @@ public class ProductDAO{
         }
     }
 
-    void deleteProduct(String productCode){
+    public void deleteProduct(String productCode){
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
             String sql;

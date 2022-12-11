@@ -1,6 +1,7 @@
-package ru.croc.task18;
+package ru.croc.task18.Tests;
 
 import ru.croc.task17.SetInfoInDB;
+import ru.croc.task18.Config.DataBaseInfo;
 
 public class Main {
     public static void main(String[] args) throws Exception {

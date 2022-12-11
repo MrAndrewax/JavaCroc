@@ -8,7 +8,7 @@ public class Order{
     private final String userLogin;
     private final List<String> productsID;
 
-    Order(int orderID, String userLogin, List<String> productsID){
+    public Order(int orderID, String userLogin, List<String> productsID){
         this.orderID = orderID;
         this.userLogin = userLogin;
         this.productsID = productsID;
