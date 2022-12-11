@@ -1,14 +1,14 @@
 package ru.croc.task18.DAO;
 
 import ru.croc.task18.Config.DataBaseInfo;
-import ru.croc.task18.Order;
-import ru.croc.task18.Product;
+import ru.croc.task18.auxiliaryClasses.Order;
+import ru.croc.task18.auxiliaryClasses.Product;
 
 import java.sql.*;
 import java.util.List;
 
 public class OrderDAO{
-    
+
     public int getMaxOrderIndex(){
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){

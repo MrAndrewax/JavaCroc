@@ -1,4 +1,4 @@
-package ru.croc.task18;
+package ru.croc.task18.auxiliaryClasses;
 
 import java.util.List;
 import java.util.Set;

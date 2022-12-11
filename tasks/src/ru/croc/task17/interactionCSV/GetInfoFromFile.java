@@ -1,4 +1,6 @@
-package ru.croc.task17;
+package ru.croc.task17.interactionCSV;
+
+import ru.croc.task17.ImportantClasses.OrderInfo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,17 +13,21 @@ public class GetInfoFromFile{
         String[] arr = line.split(",");
         return new OrderInfo(
                 Integer.parseInt(arr[0].trim()), arr[1].trim(),
-                arr[2].trim(), arr[3].trim(), Integer.parseInt(arr[4].trim()));
+                arr[2].trim(), arr[3].trim(), Integer.parseInt(arr[4].trim())
+        );
     }
     public List<OrderInfo> parseFileWithUsers(String path){
         try (FileReader fr = new FileReader(path);
              BufferedReader reader = new BufferedReader(fr)){
+
             List <OrderInfo> orders = new ArrayList<>();
             String line = reader.readLine();
+
             while (line != null) {
                 orders.add(stringToLine(line));
                 line = reader.readLine();
             }
+
             return orders;
         } catch (IOException e) {
             throw new RuntimeException();

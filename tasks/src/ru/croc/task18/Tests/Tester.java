@@ -1,7 +1,7 @@
 package ru.croc.task18.Tests;
 
 import ru.croc.task18.DAO.OrderDAO;
-import ru.croc.task18.Product;
+import ru.croc.task18.auxiliaryClasses.Product;
 import ru.croc.task18.DAO.ProductDAO;
 
 import java.util.ArrayList;

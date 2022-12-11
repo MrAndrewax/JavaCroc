@@ -1,4 +1,4 @@
-package ru.croc.task18;
+package ru.croc.task18.auxiliaryClasses;
 
 public class Product{
     private final String productId;

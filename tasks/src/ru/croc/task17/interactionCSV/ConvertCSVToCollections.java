@@ -1,4 +1,8 @@
-package ru.croc.task17;
+package ru.croc.task17.interactionCSV;
+
+import ru.croc.task17.ImportantClasses.Order;
+import ru.croc.task17.ImportantClasses.OrderInfo;
+import ru.croc.task17.ImportantClasses.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +20,7 @@ public class ConvertCSVToCollections{
         }
         return products;
     }
+
     public List<Order> getOrders(List<OrderInfo> orderInfos){
         List<Order> orders = new ArrayList<>();
         for (OrderInfo orderInfo : orderInfos){

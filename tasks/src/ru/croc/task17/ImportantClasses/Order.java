@@ -1,4 +1,4 @@
-package ru.croc.task17;
+package ru.croc.task17.ImportantClasses;
 
 public class Order {
 
@@ -6,7 +6,7 @@ public class Order {
     private final String userLogin;
     private final String productID;
 
-    Order(int orderID, String userLogin, String productID){
+    public Order(int orderID, String userLogin, String productID){
         this.orderID = orderID;
         this.userLogin = userLogin;
         this.productID = productID;

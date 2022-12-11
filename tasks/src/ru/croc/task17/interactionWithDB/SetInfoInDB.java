@@ -1,5 +1,11 @@
-package ru.croc.task17;
+package ru.croc.task17.interactionWithDB;
 
+
+import ru.croc.task17.ImportantClasses.Order;
+import ru.croc.task17.ImportantClasses.OrderInfo;
+import ru.croc.task17.ImportantClasses.Product;
+import ru.croc.task17.interactionCSV.ConvertCSVToCollections;
+import ru.croc.task17.interactionCSV.GetInfoFromFile;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,9 +64,7 @@ public class SetInfoInDB{
                 stmt.executeUpdate(sql);
             }
         } catch (SQLException e) {
-            System.out.println("Connection Failed");
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 }
