@@ -5,13 +5,27 @@ import java.util.List;
 
 public class OrderDAO{
 
-    static final String DB_URL = "jdbc:postgresql://localhost/testDB";//args[0]
-    static final String USER = "postgres";//args[1]
-    static final String PASSWORD = "pass!";//args[2]
+    public int getMaxOrderIndex(){
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+             Statement stmt = connection.createStatement()){
+
+            String sql  = "SELECT MAX(order_id) AS \"max\" FROM orders";
+
+            ResultSet resultSet = stmt.executeQuery(sql);
+            resultSet.next();
+            int index = resultSet.getInt("max");
+
+
+            return index;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     Order createOrder(String userLogin, List<Product> products){
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)){
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+             Statement stmt = connection.createStatement()){
             String sql;
 
             for (Product product : products){//Добавляем продукты, которых нет в таблице products
@@ -24,13 +38,9 @@ public class OrderDAO{
                 sql = String.format("INSERT INTO orders VALUES ('%s', '%s')", userLogin, product.getProductId());
                 stmt.executeUpdate(sql);
             }
-            connection.close();
             return null;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
         }
     }
-    //
-    // Создание заказа. Для указанного пользователя в базе данных создается новый заказ с заданным списком товаров.
 }

@@ -46,5 +46,7 @@ public class Tester{
         productDAO.deleteProduct("Т1");
         productDAO.deleteProduct("Т2");
     }
-    void testCreateOrder1(){}
+    void testCreateOrder1(){
+
+    }
 }
