@@ -1,8 +1,8 @@
 package ru.croc.task17.interactionCSV;
 
-import ru.croc.task17.ImportantClasses.Order;
-import ru.croc.task17.ImportantClasses.OrderInfo;
-import ru.croc.task17.ImportantClasses.Product;
+import ru.croc.task17.importantClasses.Order;
+import ru.croc.task17.importantClasses.OrderInfo;
+import ru.croc.task17.importantClasses.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package ru.croc.task17.interactionCSV;
 
-import ru.croc.task17.ImportantClasses.OrderInfo;
+import ru.croc.task17.importantClasses.OrderInfo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

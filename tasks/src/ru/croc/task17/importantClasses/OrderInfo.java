@@ -1,4 +1,4 @@
-package ru.croc.task17.ImportantClasses;
+package ru.croc.task17.importantClasses;
 
 public class OrderInfo {
     private final int orderID;

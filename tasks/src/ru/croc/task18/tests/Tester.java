@@ -1,4 +1,4 @@
-package ru.croc.task18.Tests;
+package ru.croc.task18.tests;
 
 import ru.croc.task18.DAO.OrderDAO;
 import ru.croc.task18.auxiliaryClasses.Product;

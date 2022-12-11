@@ -1,6 +1,6 @@
 package ru.croc.task18.DAO;
 
-import ru.croc.task18.Config.DataBaseInfo;
+import ru.croc.task18.config.DataBaseInfo;
 import ru.croc.task18.auxiliaryClasses.Product;
 
 import java.sql.*;

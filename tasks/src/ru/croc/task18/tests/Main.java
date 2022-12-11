@@ -1,7 +1,7 @@
-package ru.croc.task18.Tests;
+package ru.croc.task18.tests;
 
 import ru.croc.task17.interactionWithDB.SetInfoInDB;
-import ru.croc.task18.Config.DataBaseInfo;
+import ru.croc.task18.config.DataBaseInfo;
 
 /*Денис, я это для себя делал. Не ругай пожалуйста за неаккуратность)00)00)*/
 
