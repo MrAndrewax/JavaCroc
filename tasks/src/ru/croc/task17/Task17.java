@@ -10,8 +10,7 @@ public class Task17 {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return;
+            throw new RuntimeException(e);
         }
 
         SetInfoInDB setterInfoInDB = new SetInfoInDB(DB_URL, USER, PASSWORD);
