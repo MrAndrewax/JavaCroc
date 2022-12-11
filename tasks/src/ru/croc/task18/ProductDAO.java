@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class ProductDAO{
     Product findProduct(String productCode){
-        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+             Statement stmt = connection.createStatement()){
 
             String sql = String.format("SELECT * FROM products WHERE product_id = '%s'", productCode);
             ResultSet resultSet = stmt.executeQuery(sql);
@@ -20,14 +20,13 @@ public class ProductDAO{
                 return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
     Product createProduct(Product product){
-        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+             Statement stmt = connection.createStatement()){
 
             String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')",product.productId, product.productName, product.price);
             stmt.executeUpdate(sql);
@@ -44,17 +43,16 @@ public class ProductDAO{
                 return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
     Product updateProduct(Product product){
-        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+             Statement stmt = connection.createStatement()){
 
             String sql = String.format("UPDATE products SET product_name = '%s', price = '%d' WHERE product_id = '%s'", product.productName, product.price, product.productId);
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);//обработать.
 
             sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.productId);
             ResultSet resultSet = stmt.executeQuery(sql);
@@ -68,14 +66,13 @@ public class ProductDAO{
                 return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
     void deleteProduct(String productCode){
-        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD)){
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
+             Statement stmt = connection.createStatement()){
             String sql;
 
             sql = String.format("DELETE FROM orders WHERE product_id = '%s'", productCode);
@@ -83,10 +80,8 @@ public class ProductDAO{
 
             sql = String.format("DELETE FROM products WHERE product_name = '%s'", productCode);
             stmt.executeUpdate(sql);
-
-        } catch (SQLException e){
-            e.printStackTrace();
-            throw new RuntimeException();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

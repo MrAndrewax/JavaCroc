@@ -17,13 +17,19 @@ public class SetInfoInDB{
         this.USER = USER;
         this.PASSWORD = PASSWORD;
     }
+
+    public void dropTables(){}
+
+    public void createTables(){}
+
+    public void insertInfoInTable(){}
+
     public void setInformationInDB(String path){
         GetInfoFromFile getter = new GetInfoFromFile();
         List<OrderInfo> orderInfos = getter.parseFileWithUsers(path);
 
-        try (Connection connection = DriverManager.getConnection(this.DB_URL, this.USER, this.PASSWORD)){
-
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(this.DB_URL, this.USER, this.PASSWORD);
+             Statement stmt = connection.createStatement()){
 
             stmt.executeUpdate("DROP TABLE IF EXISTS orders;");
             stmt.executeUpdate("DROP TABLE IF EXISTS products;");
@@ -34,7 +40,7 @@ public class SetInfoInDB{
                     "product_name VARCHAR(255), " +
                     "price int, " +
                     "PRIMARY KEY (product_id));";
-            String createOrdersTable = //"DROP TABLE IF EXISTS orders; " +
+            String createOrdersTable =
                     "CREATE TABLE IF NOT EXISTS orders" +
                     "(order_id int," +
                     "user_login VARCHAR(255), " +
@@ -49,11 +55,12 @@ public class SetInfoInDB{
             List<Order> orders = converter.getOrders(orderInfos, products);
 
             for (Map.Entry<String, Product> productEntry : products.entrySet()) {
-                String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')", productEntry.getValue().productId, productEntry.getValue().productName, productEntry.getValue().price);
+                String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')",
+                        productEntry.getValue().getProductId(), productEntry.getValue().getProductName(), productEntry.getValue().getPrice());
                 stmt.executeUpdate(sql);
             }
             for (Order order : orders){
-                String sql = String.format("INSERT INTO orders VALUES (%d, '%s', '%s')", order.orderID, order.userLogin, order.productID);
+                String sql = String.format("INSERT INTO orders VALUES (%d, '%s', '%s')", order.getOrderID(), order.getUserLogin(), order.getProductID());
                 stmt.executeUpdate(sql);
             }
         } catch (SQLException e) {

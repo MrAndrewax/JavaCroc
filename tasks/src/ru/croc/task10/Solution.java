@@ -8,12 +8,7 @@ import java.util.concurrent.*;
 
 public class Solution {
 
-
-
-
     public static String calculatePassword(int threadsNumber , String hashPass){
-
-
         List<Future<String>> futures = new ArrayList<Future<String>>();
         ExecutorService executorService = Executors.newFixedThreadPool(threadsNumber);//пул потоков
         for (int i = 0; i < threadsNumber; i++){
