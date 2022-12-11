@@ -1,9 +1,9 @@
 package ru.croc.task17;
 
 public class Product{
-    private String productId;
-    private String productName;
-    private int price;
+    private final String productId;
+    private final String productName;
+    private final int price;
 
     Product(String productId, String productName, int price){
         this.productId = productId;

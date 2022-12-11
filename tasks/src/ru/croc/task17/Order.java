@@ -2,9 +2,9 @@ package ru.croc.task17;
 
 public class Order {
 
-    private int orderID;
-    private String userLogin;
-    private String productID;
+    private final int orderID;
+    private final String userLogin;
+    private final String productID;
 
     Order(int orderID, String userLogin, String productID){
         this.orderID = orderID;

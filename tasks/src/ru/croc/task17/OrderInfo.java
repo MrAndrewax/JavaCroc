@@ -1,11 +1,11 @@
 package ru.croc.task17;
 
 public class OrderInfo {
-    private int orderID;
-    private String userLogin;
-    private String productId;
-    private String productName;
-    private int price;
+    private final int orderID;
+    private final String userLogin;
+    private final String productId;
+    private final String productName;
+    private final int price;
 
     OrderInfo(int orderID, String userLogin, String productId, String productName, int price){
         this.orderID = orderID;
@@ -29,5 +29,15 @@ public class OrderInfo {
         return userLogin;
     }
 
-    ge
+    public String getProductId() {
+        return productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

@@ -12,18 +12,12 @@ public class SetInfoInDB{
     final String DB_URL;
     final String USER;
     final String PASSWORD;
+
     public SetInfoInDB(String DB_URL, String USER, String PASSWORD){
         this.DB_URL = DB_URL;
         this.USER = USER;
         this.PASSWORD = PASSWORD;
     }
-
-    public void dropTables(){}
-
-    public void createTables(){}
-
-    public void insertInfoInTable(){}
-
     public void setInformationInDB(String path){
         GetInfoFromFile getter = new GetInfoFromFile();
         List<OrderInfo> orderInfos = getter.parseFileWithUsers(path);
@@ -52,7 +46,7 @@ public class SetInfoInDB{
             ConvertCSVToCollections converter = new ConvertCSVToCollections();
 
             Map<String, Product> products = converter.getProducts(orderInfos);
-            List<Order> orders = converter.getOrders(orderInfos, products);
+            List<Order> orders = converter.getOrders(orderInfos);
 
             for (Map.Entry<String, Product> productEntry : products.entrySet()) {
                 String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')",
