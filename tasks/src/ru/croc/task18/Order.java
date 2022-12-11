@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Set;
 
 public class Order{
-    int orderID;
-    String userLogin;
-    List<String> productsID;
+    private final int orderID;
+    private final String userLogin;
+    private final List<String> productsID;
+
     Order(int orderID, String userLogin, List<String> productsID){
         this.orderID = orderID;
         this.userLogin = userLogin;
@@ -18,5 +19,17 @@ public class Order{
         return "orderID = " + orderID +
                 ", userLogin = '" + userLogin + '\'' +
                 ", productsID = '" + productsID + '\'';
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public List<String> getProductsID() {
+        return productsID;
     }
 }

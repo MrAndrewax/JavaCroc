@@ -41,8 +41,10 @@ public class Tester{
         Product product1 = productDAO.updateProduct(product);
         System.out.println(product1);
     }
-    void testDeleteProduct1(){}
-    void testDeleteProduct2(){}
+    void testDeleteProduct1(){
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.deleteProduct("Т1");
+        productDAO.deleteProduct("Т2");
+    }
     void testCreateOrder1(){}
-    void testCreateOrder2(){}
 }

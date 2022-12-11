@@ -12,9 +12,9 @@ public class Main {
         tester.testFindProduct1();
         tester.testFindProduct2();
         tester.testCreateProduct1();
-        //tester.testCreateProduct2();
-        tester.testUpdateProduct1();
-        tester.testUpdateProduct2();
+        //tester.testUpdateProduct1();
+        //tester.testUpdateProduct2();
+        tester.testDeleteProduct1();
     }
 }
 

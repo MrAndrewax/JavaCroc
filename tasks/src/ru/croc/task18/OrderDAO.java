@@ -10,19 +10,18 @@ public class OrderDAO{
     static final String PASSWORD = "pass!";//args[2]
 
     Order createOrder(String userLogin, List<Product> products){
-
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)){
             Statement stmt = connection.createStatement();
             String sql;
 
             for (Product product : products){//Добавляем продукты, которых нет в таблице products
                 sql = String.format("INSERT IF NOT EXISTS INTO products (product_id, product_name, price) VALUES ('%s', '%s', '%d')",
-                        product.productId, product.productName, product.price);
+                        product.getProductId(), product.getProductName(), product.getPrice());
                 stmt.executeUpdate(sql);
             }
 
             for (Product product : products){
-                sql = String.format("INSERT INTO orders VALUES ('%s', '%s')", userLogin, product.productId);
+                sql = String.format("INSERT INTO orders VALUES ('%s', '%s')", userLogin, product.getProductId());
                 stmt.executeUpdate(sql);
             }
             connection.close();

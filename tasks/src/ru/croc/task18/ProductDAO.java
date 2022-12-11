@@ -28,10 +28,11 @@ public class ProductDAO{
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
 
-            String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')",product.productId, product.productName, product.price);
+            String sql = String.format("INSERT INTO products VALUES ('%s', '%s', '%d')",
+                    product.getProductId(), product.getProductName(), product.getPrice());
             stmt.executeUpdate(sql);
 
-            sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.productId);
+            sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.getProductId());
             ResultSet resultSet = stmt.executeQuery(sql);
             if (resultSet.next()){
                 String productID = resultSet.getString("product_id");
@@ -51,10 +52,11 @@ public class ProductDAO{
         try (Connection connection = DriverManager.getConnection(DataBaseInfo.DB_URL, DataBaseInfo.USER, DataBaseInfo.PASSWORD);
              Statement stmt = connection.createStatement()){
 
-            String sql = String.format("UPDATE products SET product_name = '%s', price = '%d' WHERE product_id = '%s'", product.productName, product.price, product.productId);
+            String sql = String.format("UPDATE products SET product_name = '%s', price = '%d' WHERE product_id = '%s'",
+                    product.getProductName(), product.getPrice(), product.getProductId());
             stmt.executeUpdate(sql);//обработать.
 
-            sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.productId);
+            sql = String.format("SELECT * FROM products WHERE product_id = '%s'", product.getProductId());
             ResultSet resultSet = stmt.executeQuery(sql);
             if (resultSet.next()){
                 String productID = resultSet.getString("product_id");
@@ -78,7 +80,7 @@ public class ProductDAO{
             sql = String.format("DELETE FROM orders WHERE product_id = '%s'", productCode);
             stmt.executeUpdate(sql);
 
-            sql = String.format("DELETE FROM products WHERE product_name = '%s'", productCode);
+            sql = String.format("DELETE FROM products WHERE product_id = '%s'", productCode);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
